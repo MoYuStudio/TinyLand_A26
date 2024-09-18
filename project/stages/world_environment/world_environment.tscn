@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://oadd4bjlwmo3"]
+
+[ext_resource type="Environment" uid="uid://b3dksqa4bdkqk" path="res://libraries/skybox/stylized_sky/stylized_sky.tres" id="1_yhvlo"]
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = ExtResource("1_yhvlo")

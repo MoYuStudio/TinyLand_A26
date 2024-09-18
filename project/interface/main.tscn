@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://bg6bxs5o1xd0x"]
+
+[ext_resource type="PackedScene" uid="uid://c2pcouwxcm07x" path="res://entities/player/player.tscn" id="1_s76nt"]
+[ext_resource type="Texture2D" uid="uid://dpi12cikpx6el" path="res://icon.svg" id="2_pl7vk"]
+[ext_resource type="PackedScene" uid="uid://oadd4bjlwmo3" path="res://stages/world_environment/world_environment.tscn" id="3_j61h1"]
+[ext_resource type="PackedScene" uid="uid://bgbytx11sifas" path="res://stages/gridmap/gridmap.tscn" id="4_l4l7i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v3a8r"]
+albedo_texture = ExtResource("2_pl7vk")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_63a4x"]
+material = SubResource("StandardMaterial3D_v3a8r")
+size = Vector2(100, 100)
+subdivide_width = 100
+subdivide_depth = 100
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_mf7to"]
+plane = Plane(1000, 1, 1000, 0)
+
+[node name="Main" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource("1_s76nt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.92102, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("PlaneMesh_63a4x")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+visible = false
+shape = SubResource("WorldBoundaryShape3D_mf7to")
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("3_j61h1")]
+
+[node name="GridMap" parent="." instance=ExtResource("4_l4l7i")]

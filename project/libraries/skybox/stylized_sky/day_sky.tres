@@ -1,0 +1,65 @@
+[gd_resource type="ShaderMaterial" load_steps=12 format=3 uid="uid://dh6ykun8bv60u"]
+
+[ext_resource type="Shader" path="res://libraries/skybox/stylized_sky/stylized_sky.gdshader" id="1_vashs"]
+
+[sub_resource type="Gradient" id="Gradient_0dv2k"]
+offsets = PackedFloat32Array(0.4, 0.6)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_34ws0"]
+gradient = SubResource("Gradient_0dv2k")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Curve" id="Curve_nlyq4"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.8), -0.222222, 0.0, 1, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_dap1v"]
+texture_mode = 1
+curve = SubResource("Curve_nlyq4")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_r0061"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0yhdh"]
+seamless = true
+noise = SubResource("FastNoiseLite_r0061")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_picl1"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x5wd0"]
+seamless = true
+noise = SubResource("FastNoiseLite_picl1")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hmi3i"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_p7eat"]
+seamless = true
+noise = SubResource("FastNoiseLite_hmi3i")
+
+[resource]
+shader = ExtResource("1_vashs")
+shader_parameter/clouds_samples = 32
+shader_parameter/shadow_sample = 4
+shader_parameter/clouds_density = 0.4
+shader_parameter/clouds_scale = 1.0
+shader_parameter/clouds_smoothness = 0.03
+shader_parameter/clouds_light_color = Color(1, 1, 1, 1)
+shader_parameter/clouds_shadow_intensity = 3.5
+shader_parameter/cloud_shape_sampler = SubResource("NoiseTexture2D_x5wd0")
+shader_parameter/cloud_noise_sampler = SubResource("NoiseTexture2D_0yhdh")
+shader_parameter/cloud_curves = SubResource("CurveTexture_dap1v")
+shader_parameter/high_clouds_density = 0.2
+shader_parameter/high_clouds_sampler = SubResource("NoiseTexture2D_p7eat")
+shader_parameter/top_color = Color(0.34902, 0.588235, 1, 1)
+shader_parameter/bottom_color = Color(0, 0.329412, 0.968627, 1)
+shader_parameter/sun_scatter = Color(0.298039, 0.298039, 0.298039, 1)
+shader_parameter/astro_tint = Color(0.905882, 0.788235, 0.627451, 1)
+shader_parameter/astro_scale = 9.0
+shader_parameter/astro_intensity = 3.0
+shader_parameter/astro_sampler = SubResource("GradientTexture2D_34ws0")
+shader_parameter/stars_intensity = 5.0
+shader_parameter/shooting_stars_intensity = 0.0
+shader_parameter/shooting_star_tint = null

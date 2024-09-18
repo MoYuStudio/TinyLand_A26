@@ -1,0 +1,27 @@
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://b3dksqa4bdkqk"]
+
+[ext_resource type="Material" uid="uid://dh6ykun8bv60u" path="res://libraries/skybox/stylized_sky/day_sky.tres" id="1_iuvtg"]
+
+[sub_resource type="Sky" id="Sky_victq"]
+sky_material = ExtResource("1_iuvtg")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_victq")
+ambient_light_source = 2
+ambient_light_color = Color(0.45098, 0.333333, 0.309804, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 3.0
+glow_strength = 1.5
+glow_bloom = 0.2
+fog_light_color = Color(0.517647, 0.552941, 0.607843, 1)
+fog_light_energy = 1.24
+fog_density = 0.1129
+fog_height = 3.48
+fog_height_density = 0.0027
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.03
+volumetric_fog_length = 16.0
+volumetric_fog_sky_affect = 0.36
