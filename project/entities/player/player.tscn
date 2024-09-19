@@ -1,21 +1,71 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2pcouwxcm07x"]
+[gd_scene load_steps=8 format=3 uid="uid://c2pcouwxcm07x"]
 
-[ext_resource type="Texture2D" uid="uid://dpi12cikpx6el" path="res://icon.svg" id="1_3tl7t"]
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_o1lhu"]
+[ext_resource type="Texture2D" uid="uid://d10jqv3mciuqb" path="res://entities/player/art/sprites.png" id="2_dw8nr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tct8u"]
+
+[sub_resource type="Animation" id="Animation_0bi3y"]
+resource_name = "idle_up"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.666667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [30, 31, 32, 33]
+}
+
+[sub_resource type="Animation" id="Animation_aqfux"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7xtj3"]
+_data = {
+"RESET": SubResource("Animation_aqfux"),
+"idle_up": SubResource("Animation_0bi3y")
+}
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_xr0ku"]
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_o1lhu")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_tct8u")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 6, 1)
+
+[node name="Sprite" type="Sprite3D" parent="."]
 transform = Transform3D(9, 0, 0, 0, 9, 0, 0, 0, 9, 0, 0, 0)
 billboard = 1
 texture_filter = 0
-texture = ExtResource("1_3tl7t")
+texture = ExtResource("2_dw8nr")
+hframes = 10
+vframes = 100
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.961262, 0.275637, 0, -0.275637, 0.961262, 0, 1, 2)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7xtj3")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_xr0ku")
+advance_expression_base_node = NodePath("../AnimationPlayer")

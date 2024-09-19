@@ -1,6 +1,8 @@
 
 class_name Player extends CharacterBody3D
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 # 移动速度
 var speed = 9
 # 重力加速度
@@ -9,18 +11,18 @@ var gravity = -64
 var jump_speed = 64
 
 func _ready() -> void:
-	# 初始化代码可以放在这里
+	animation_player.play("idle_up")
 	pass
 
 func _physics_process(delta: float) -> void:
 	velocity = Vector3.ZERO
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("move_up"):
 		velocity.z -= speed
-	if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed("move_down"):
 		velocity.z += speed
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("move_left"):
 		velocity.x -= speed
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("move_right"):
 		velocity.x += speed
 	
 	# 跳跃逻辑

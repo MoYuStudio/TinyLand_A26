@@ -1,18 +1,57 @@
-[gd_scene load_steps=3 format=3 uid="uid://dira7bu1oxuvu"]
+[gd_scene load_steps=8 format=3 uid="uid://dira7bu1oxuvu"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_dih2r"]
-size = Vector2(1, 1)
+[ext_resource type="ArrayMesh" uid="uid://dg50h15ptkqn2" path="res://stages/grid/grass/grass.obj" id="1_820vd"]
+[ext_resource type="ArrayMesh" uid="uid://bi5jfntmit48g" path="res://stages/grid/sand/sand.obj" id="2_7ati2"]
+[ext_resource type="Texture2D" uid="uid://cp8vqvi6w1a0d" path="res://stages/grid/grass/texture.png" id="2_oqwhp"]
+[ext_resource type="ArrayMesh" uid="uid://dtccrxkc24sni" path="res://stages/grid/rock/rock.obj" id="3_mu0w5"]
+[ext_resource type="ArrayMesh" uid="uid://cxa5wbjcphsd1" path="res://stages/grid/water/water.obj" id="4_1mkpv"]
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_6rt8c"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gpdio"]
+albedo_texture = ExtResource("2_oqwhp")
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_384av"]
+size = Vector3(1, 0.1, 1)
 
 [node name="MeshLibrary" type="Node3D"]
 
-[node name="Land" type="Node3D" parent="."]
+[node name="Grass" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.22544e-05, 0.0025034, -0.00200051)
+mesh = ExtResource("1_820vd")
+surface_material_override/0 = SubResource("StandardMaterial3D_gpdio")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Land"]
-mesh = SubResource("PlaneMesh_dih2r")
+[node name="StaticBody" type="StaticBody3D" parent="Grass"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Land/MeshInstance3D"]
+[node name="CollisionShape" type="CollisionShape3D" parent="Grass/StaticBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("BoxShape3D_384av")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Land/MeshInstance3D/StaticBody3D"]
-shape = SubResource("WorldBoundaryShape3D_6rt8c")
+[node name="Sand" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+mesh = ExtResource("2_7ati2")
+
+[node name="StaticBody" type="StaticBody3D" parent="Sand"]
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Sand/StaticBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("BoxShape3D_384av")
+
+[node name="Rock" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+mesh = ExtResource("3_mu0w5")
+
+[node name="StaticBody" type="StaticBody3D" parent="Rock"]
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Rock/StaticBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("BoxShape3D_384av")
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+mesh = ExtResource("4_1mkpv")
+
+[node name="StaticBody" type="StaticBody3D" parent="Water"]
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Water/StaticBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("BoxShape3D_384av")

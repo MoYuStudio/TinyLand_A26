@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bgbytx11sifas"]
 
-[ext_resource type="MeshLibrary" uid="uid://dgcyjdm2lpwi0" path="res://stages/gridmap/mesh_library.tres" id="1_81wki"]
+[ext_resource type="MeshLibrary" uid="uid://dltgmp0dcx848" path="res://stages/gridmap/mesh_library.tres" id="1_81wki"]
 [ext_resource type="Script" path="res://stages/gridmap/gridmap.gd" id="1_outal"]
 
 [node name="GridMap" type="GridMap"]

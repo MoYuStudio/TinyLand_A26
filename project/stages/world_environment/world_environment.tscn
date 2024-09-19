@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://oadd4bjlwmo3"]
+[gd_scene load_steps=2 format=3 uid="uid://dtgm6td1o0a8g"]
 
 [ext_resource type="Environment" uid="uid://b3dksqa4bdkqk" path="res://libraries/skybox/stylized_sky/stylized_sky.tres" id="1_yhvlo"]
 
-[node name="WorldEnvironment" type="WorldEnvironment"]
+[node name="WorldEnvironment" type="Node"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("1_yhvlo")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
